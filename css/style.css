@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+.hero {
+    min-height: 100vh;
+}
