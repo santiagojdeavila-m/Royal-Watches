@@ -1,8 +1,222 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     background-color: black;
     color: white;
+    font-family: "Montserrat", sans-serif;
 }
+
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8%;
+}
+
+header img {
+    max-width: 60px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+header img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 8px gold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    transition: 0.3s;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -4px;
+    background-color: gold;
+    transition: width 0.3s;
+}
+
+nav a:hover {
+    color: gold;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
 .hero {
-    min-height: 100vh;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+}
+
+.hero-content {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.hero-image {
+    max-width: 600px;
+}
+
+.hero-image img {
+    width: 100%;
+    position: relative;
+    top: -10px;
+    left: -15px;
+    z-index: 2;
+}
+
+.hero-logo {
+    max-width: 180px;
+}
+
+h1 {
+    font-family: "playfair display", serif;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: white;
+    text-align: center;
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    max-width: 32rem;
+    margin: 0;
+    text-align: center;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.hero-actions a {
+    display: inline-block;
+    padding: 14px 29px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: 0.2s;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: gold;
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: #ffe96c;
+    transform: scale(1.015);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: gold;
+    border: 1px solid gold;
+}
+
+.btn-secondary:hover{
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    transform: scale(1.015);
+}
+
+.hero-divider {
+    position: relative;
+    width: 100%;
+    height: 10px;
+}
+
+.hero-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 7.5%;
+    width: 85%;
+    height: 1px;
+    background-color: gold;
+}
+
+.hero-divider::after {
+    content: "👑";
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.4);
+    color: gold;
+    background-color: black;
+    z-index: 2;
+}
+
+.hero-features {
+    display: flex;
+    gap: 16px;
+    width: fit-content;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    flex: 0 1 auto;
+    gap: 8px;
+}
+
+.feature-text {
+    min-width: 180px;
+}
+
+.feature-text h3 {
+    margin: 0 0 4px 0;
+}
+
+.feature-text p {
+    font-size: 0.85rem;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+.feature-icon {
+    color: gold;
+}
+
+.hero-watch {
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.hero-watch:hover {
+    filter:
+        drop-shadow(0 0 8px rgba(255, 215, 0, 0.70))
+        drop-shadow(0 0 20px rgba(255, 193, 7, 0.45))
+        drop-shadow(0 0 35px rgba(255, 174, 0, 0.20));
+
+    transform: scale(1.015);
 }

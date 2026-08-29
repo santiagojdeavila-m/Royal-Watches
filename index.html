@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Watches | El tiempo con estilo</title>
     <meta name="description" content="Descubre relojes elegantes inspirados en las mejores marcas. Royal Watches ofrece diseños premium, calidad y estilo para cada ocasión.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <a href="#"><img src="img/logo.png" alt="Logo oficial de Royal Watches"></a>
+        <a href="#"><img src="img/logo.png" alt="Logo oficial de Royal Watches header"></a>
         <nav>
             <ul>
                 <li><a href="#">Inicio</a></li>
@@ -22,17 +25,23 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <img src="img/logo.png" alt="Logo oficial de Royal Watches">
-                <h1>EL TIEMPO CON ESTILO</h1>
+                <img class="hero-logo" src="img/Hero-logo-RW.png" alt="Logo oficial de Royal Watches">
+                <h1>EL TIEMPO<br> CON ESTILO</h1>
+                <div class="hero-divider"></div>
                 <p>Descubre nuestras colecciones exclusivas y encuentra el reloj ideal para cada ocasión.</p>
                 <div class="hero-actions">
-                    <a href="#">COMPRAR AHORA</a>
-                    <a href="#">EXPLORAR COLECCIÓN</a>
+                    <a href="#" class="btn-primary">COMPRAR AHORA</a>
+                    <a href="#" class="btn-secondary">EXPLORAR COLECCIÓN</a>
                 </div>
                 <div class="hero-features">
                     <div class="feature">
                         <div class="feature-icon">
-
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M1 3h13v13H1z"/>
+                                <path d="M14 8h4l3 3v5h-7V8z"/>
+                                <circle cx="5.5" cy="18.5" r="1.5"/>
+                                <circle cx="18.5" cy="18.5" r="1.5"/>
+                            </svg>
                         </div>
                         <div class="feature-text">
                             <h3>ENVIO</h3>
@@ -41,7 +50,9 @@
                     </div>
                     <div class="feature">
                         <div class="feature-icon">
-
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2l8 3v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5z"/>
+                            </svg>
                         </div>
                         <div class="feature-text">
                             <h3>GARANTÍA</h3>
@@ -50,7 +61,10 @@
                     </div>
                     <div class="feature">
                         <div class="feature-icon">
-
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="4" y="10" width="16" height="10" rx="2"/>
+                                <path d="M7 10V7a5 5 0 0 1 10 0v3"/>
+                            </svg>
                         </div>
                         <div class="feature-text">
                             <h3>PAGO</h3>
@@ -61,7 +75,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="img/watch.png" alt="Reloj de lujo Royal Watches">
+                <img class="hero-watch" src="img/watch.png" alt="Reloj de lujo Royal Watches">
             </div>
         </section>
     </main> 

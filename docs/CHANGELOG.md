@@ -12,3 +12,9 @@
 - incorpore el logo de la página con html.
 - hice el menú de navegacion con html.
 
+## (16/07/2026)
+- terminé la estructura HTML del hero.
+- realice commit #1 del proyecto.
+
+## (28/08/2026)
+- layout del header y hero completados.
