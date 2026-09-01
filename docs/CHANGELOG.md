@@ -18,3 +18,6 @@
 
 ## (28/08/2026)
 - layout del header y hero completados.
+
+## (01/09/2026)
+- finalizacion de estructura html y estilos css para productos destacados y marcas.
