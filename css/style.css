@@ -318,3 +318,54 @@ h1 span {
     .marcas-grid {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+.cta {
+    background-color: #0d0d0d;
+    text-align: center;
+    padding: 70px 8%;
+}
+
+.cta-title {
+    font-family: "playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: white;
+    margin: 0 0 16px 0;
+}
+
+.cta-text {
+    font-size: 1rem;
+    color: #ccc;
+    max-width: 32rem;
+    margin: 0 auto 24px auto;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 8%;
+}
+.footer-col img {
+    max-width: 150px;
+}
+.footer-col h3 {
+    color:gold;
+    margin-bottom: 16px;
+}
+.footer-col p,
+.footer-col a {
+    color: #cccccc;
+    text-decoration: none;
+}
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-col li {
+    margin-bottom: 10px;
+}
+footer {
+    border-top: 1px solid gold;
+}
