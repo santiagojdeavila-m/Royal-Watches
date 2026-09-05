@@ -19,6 +19,7 @@ header {
     align-items: center;
     padding: 10px 8%;
     background-color: black;
+    border-bottom: 1px dashed #333;
 }
 
 header img {
@@ -285,23 +286,24 @@ h1 span {
 .marcas-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+    gap: 50px;
     justify-items: center;
 }
 
 .marcas {
-    padding: 60px 8%;
+    padding: 40px 8% 80px 8%;
     text-align: center;
+    min-height: calc(100vh - 80px);
 }
 
 .marcas h2 {
     font-family: "playfair Display", serif;
     font-size: 2rem;
-    margin-bottom: 24px;
+    margin-bottom: 50px;
 }
 
 .marca-item img {
-    max-width: 120px;
+    max-width: 150px;
     background-color: white;
     border-radius: 8px;
     padding: 20px;
@@ -323,7 +325,7 @@ h1 span {
 .cta {
     background-color: #0d0d0d;
     text-align: center;
-    padding: 70px 8%;
+    padding: 60px 8%;
 }
 
 .cta-title {
@@ -341,31 +343,47 @@ h1 span {
     max-width: 32rem;
     margin: 0 auto 24px auto;
 }
+
 footer {
+    position: relative;
     display: flex;
     justify-content: space-between;
     gap: 40px;
-    padding: 60px 8%;
+    padding: 35px 8%;
+    border-top: 1px solid gold;
 }
+
 .footer-col img {
     max-width: 150px;
 }
+
 .footer-col h3 {
     color:gold;
     margin-bottom: 16px;
 }
+
 .footer-col p,
 .footer-col a {
     color: #cccccc;
     text-decoration: none;
 }
+
 .footer-col ul {
     list-style: none;
     padding: 0;
 }
+
 .footer-col li {
     margin-bottom: 10px;
 }
-footer {
-    border-top: 1px solid gold;
+
+.footer-copyright {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    color: #777;
+    font-size: 0.75rem;
+    white-space: nowrap;
 }
