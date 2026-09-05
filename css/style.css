@@ -317,9 +317,7 @@ h1 span {
 }
 
 @media (max-width: 768px) {
-    .marcas-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+    
 }
 
 .cta {
