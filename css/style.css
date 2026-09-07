@@ -315,9 +315,13 @@ h1 span {
     transform: scale(1.08);
     box-shadow: 0 0 20px 4px gold;
 }
-
-@media (max-width: 768px) {
-    
+.menu-toggle { 
+    display: none;
+    background: none;
+    border: none;
+    color: gold;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 .cta {
