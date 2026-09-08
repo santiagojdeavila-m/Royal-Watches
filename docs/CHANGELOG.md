@@ -22,3 +22,6 @@
 ## (01/09/2026)
 - finalizacion de estructura html y estilos css para productos destacados y marcas.
 - estructura html y estilos css para cta y footer completados.
+
+## (07/09/2026)
+- diseño responsive de la landing page completado.
