@@ -323,47 +323,13 @@ h1 span {
     font-size: 2rem;
     cursor: pointer;
 }
-@media (max-width: 768px) {
-    .marcas-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    nav {
-        display: none; 
-    }
-    nav.nav-active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background-color: black;
-        padding: 20px;
-    }
-    nav.nav-active ul {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
-    .menu-toggle {
-        display: block; 
-    }
-    .marcas-item img {
-        max-width: 100px;
-        padding: 12px;
-    }
-    .marcas-grid {
-        gap: 20px;
-    }
-    footer {
-        flex-direction: column;
-        gap: 24px;
-    }  
-    .cta {
+
+.cta {
     background-color: #0d0d0d;
     text-align: center;
     padding: 60px 8%;
 }
+
 .cta-title {
     font-family: "playfair Display", serif;
     font-size: 3rem;
