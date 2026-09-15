@@ -35,6 +35,10 @@
         padding: 6px 10px;
         font-size: 0.65rem;
     }
+
+    .catalogo-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -117,6 +121,11 @@
 
     .cta-text {
         font-size: 0.9rem;
+    }
+
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }
 
@@ -238,5 +247,14 @@
 
     .cta .btn-primary {
         width: 65%;
+    }
+
+    .catalogo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .catalogo h1 {
+        font-size: 1.8rem;
     }
 }

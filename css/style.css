@@ -389,3 +389,27 @@ footer {
     font-size: 0.75rem;
     white-space: nowrap;
 }
+
+.product-card .description {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.catalogo {
+    padding: 40px 8% 80px 8%;
+    text-align: center;
+}
+
+.catalogo h1 {
+    font-family: "playfair Display", serif;
+    font-size: 2.5rem;
+    margin-bottom: 32px;
+}
+
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
