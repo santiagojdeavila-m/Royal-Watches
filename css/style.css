@@ -413,3 +413,25 @@ footer {
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
 }
+.catalogo-controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 8%;
+}
+#input-busqueda,
+#orden-precio {
+   background-color: #111;
+   border: 1px solid #333;
+   color: white;
+   padding: 8px 12px;
+   border-radius: 5px;
+}
+.filtros-marca {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    color:#ccc;
+    font-size: 0.9rem;
+}
