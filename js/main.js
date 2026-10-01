@@ -187,6 +187,8 @@ function renderizarProductos(selectorContenedor, listaProductos) {
         return;
     }
 
+    contenedor.innerHTML = "";
+
     listaProductos.forEach(function(producto) {
         const tarjeta = document.createElement("article");
         tarjeta.classList.add("product-card");
@@ -234,13 +236,13 @@ function filtrarPorMarca(marcaSeleccionada) {
 function ordenarPorPrecio(listaProductos, orden) {
     const copia = [...listaProductos];
 
-    if (orden === "menor-a-mayor") {
+    if (orden === "asc") {
         return copia.sort(function (a, b) {
             return a.precio - b.precio;
         });
     }
 
-    if (orden === "mayor-a-menor") {
+    if (orden === "desc") {
         return copia.sort(function (a, b) {
             return b.precio - a.precio;
         });
@@ -248,3 +250,39 @@ function ordenarPorPrecio(listaProductos, orden) {
 
     return copia;
 }
+
+function filtrarYOrdenarCatalogo() {
+    const textoBusqueda = document.querySelector("#input-busqueda").value;
+
+    const checkboxesMarcados = document.querySelectorAll('input[name="marca"]:checked');
+    const marcasSeleccionadas = Array.from(checkboxesMarcados).map(function (checkbox) {
+        return checkbox.value;
+    });
+
+    const ordenSeleccionado = document.querySelector("#orden-precio").value;
+
+    let resultado = buscarProductos(textoBusqueda);
+
+    if (marcasSeleccionadas.length > 0) {
+        resultado = resultado.filter(function (producto) {
+            return marcasSeleccionadas.includes(producto.marca);
+        });
+    }
+
+    if (ordenSeleccionado !== "") {
+        resultado = ordenarPorPrecio(resultado, ordenSeleccionado);
+    }
+
+    renderizarProductos(".catalogo-grid", resultado);
+}
+
+const inputBusqueda = document.querySelector("#input-busqueda");
+inputBusqueda.addEventListener("input", filtrarYOrdenarCatalogo);
+
+const checkboxesMarca = document.querySelectorAll('input[name="marca"]');
+checkboxesMarca.forEach(function (checkbox) {
+    checkbox.addEventListener("change", filtrarYOrdenarCatalogo);
+});
+
+const selectOrden = document.querySelector("#orden-precio");
+selectOrden.addEventListener("change", filtrarYOrdenarCatalogo);
