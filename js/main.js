@@ -194,21 +194,25 @@ function renderizarProductos(selectorContenedor, listaProductos) {
         tarjeta.classList.add("product-card");
 
         let descripcionHTML = "";
+        let rutaImagen = producto.imagen;
+        let rutaDetalle = "pages/detalle.html";
 
         if (selectorContenedor === ".catalogo-grid") {
             descripcionHTML = `<p class="description">${producto.descripcion}</p>`;
-        }
-        let rutaImagen = producto.imagen;
-
-        if (selectorContenedor === ".catalogo-grid") {
             rutaImagen = "../" + producto.imagen;
+            rutaDetalle = "detalle.html";
         }
+
+        const nombreCodificado = encodeURIComponent(producto.nombre);
+
         tarjeta.innerHTML = `
-            <img src="${rutaImagen}" alt="${producto.nombre}" loading="lazy">
-            <h3>${producto.nombre}</h3>
-            ${descripcionHTML}
-            <p class="price">$${producto.precio},00</p>
-            <a href="#" class="btn-primary">Agregar al carrito</a>
+            <a href="${rutaDetalle}?producto=${nombreCodificado}" class="product-card-link">
+                <img src="${rutaImagen}" alt="${producto.nombre}" loading="lazy">
+                <h3>${producto.nombre}</h3>
+                ${descripcionHTML}
+                <p class="price">$${producto.precio},00</p>
+            </a>
+            <a href="#" class="btn-primary btn-agregar">Agregar al carrito</a>
         `;
         contenedor.appendChild(tarjeta);
     });
@@ -277,7 +281,9 @@ function filtrarYOrdenarCatalogo() {
 }
 
 const inputBusqueda = document.querySelector("#input-busqueda");
-inputBusqueda.addEventListener("input", filtrarYOrdenarCatalogo);
+if (inputBusqueda) {
+    inputBusqueda.addEventListener("input", filtrarYOrdenarCatalogo);
+}
 
 const checkboxesMarca = document.querySelectorAll('input[name="marca"]');
 checkboxesMarca.forEach(function (checkbox) {
@@ -285,4 +291,67 @@ checkboxesMarca.forEach(function (checkbox) {
 });
 
 const selectOrden = document.querySelector("#orden-precio");
-selectOrden.addEventListener("change", filtrarYOrdenarCatalogo);
+if (selectOrden) {
+    selectOrden.addEventListener("change", filtrarYOrdenarCatalogo);
+}
+
+const contenedorDetalle = document.querySelector(".detalle-producto");
+
+if (contenedorDetalle) {
+    const parametros = new URLSearchParams(window.location.search);
+    const nombreBuscado = parametros.get("producto");
+
+    const producto = productos.find(function (p) {
+        return p.nombre === nombreBuscado;
+    });
+
+    if (producto) {
+        contenedorDetalle.innerHTML = `
+            <img src="../${producto.imagen}" alt="${producto.nombre}">
+            <div class="detalle-info">
+                <h1>${producto.nombre}</h1>
+                <p class="detalle-marca">${producto.marca}</p>
+                <p class="detalle-descripcion">${producto.descripcion}</p>
+                <p class="price">$${producto.precio},00</p>
+                <a href="#" class="btn-primary btn-agregar">Agregar al carrito</a>
+            </div>
+        `;
+    } else {
+        contenedorDetalle.innerHTML = `<p>Producto no encontrado.</p>`;
+    }
+}
+
+const botonVolver = document.querySelector(".btn-volver");
+
+if (botonVolver) {
+    botonVolver.addEventListener("click", function () {
+        history.back();
+    });
+}
+
+const carritoToggle = document.querySelector(".carrito-toggle");
+const carritoSidebar = document.querySelector(".carrito-sidebar");
+const carritoOverlay = document.querySelector(".carrito-overlay");
+const carritoCerrar = document.querySelector(".carrito-cerrar");
+
+function abrirCarrito() {
+    carritoSidebar.classList.add("activo");
+    carritoOverlay.classList.add("activo");
+}
+
+function cerrarCarrito() {
+    carritoSidebar.classList.remove("activo");
+    carritoOverlay.classList.remove("activo");
+}
+
+if (carritoToggle) {
+    carritoToggle.addEventListener("click", abrirCarrito);
+}
+
+if (carritoCerrar) {
+    carritoCerrar.addEventListener("click", cerrarCarrito);
+}
+
+if (carritoOverlay) {
+    carritoOverlay.addEventListener("click", cerrarCarrito);
+}

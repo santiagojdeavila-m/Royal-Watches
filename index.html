@@ -22,6 +22,7 @@
                 <li><a href="#">Iniciar Sesión</a></li>
             </ul>
         </nav>
+        <button class="carrito-toggle">🛒</button>
         <button class="menu-toggle">☰</button>
     </header>
     <main>
@@ -112,7 +113,7 @@
         <section class="cta">
             <h2 class="cta-title">Ediciones limitadas,<br>No esperes más.</h2>
              <p class="cta-text">Cada pieza es una edición exclusiva — cuando se agota, no vuelve.</p>
-            <a href="#" class="btn-primary">Comprar ahora</a>
+            <a href="pages/catalogo.html" class="btn-primary">Comprar ahora</a>
         </section>
     </main> 
     <footer>
@@ -135,6 +136,34 @@
         </div> 
          <p class="footer-copyright">&copy; 2026 Royal Watches. Todos los derechos reservados.</p>
     </footer>
+    <div class="carrito-overlay"></div>
+
+    <aside class="carrito-sidebar">
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <button class="carrito-cerrar">✕</button>
+        </div>
+        <div class="carrito-items">
+            <!-- Ejemplo de producto en el carrito, hoy escrito a mano -->
+            <div class="carrito-item">
+                <img src="../img/img-catalogo/Rolex_Submariner.png" alt="Rolex Submariner">
+                <div class="carrito-item-info">
+                    <h4>Rolex Submariner</h4>
+                    <p class="carrito-item-precio">$5,00</p>
+                    <div class="carrito-cantidad">
+                        <button class="cantidad-menos">-</button>
+                        <span>1</span>
+                        <button class="cantidad-mas">+</button>
+                    </div>
+                </div>
+                <button class="carrito-item-eliminar">🗑</button>
+            </div>
+        </div>
+        <div class="carrito-footer">
+            <p class="carrito-total">Total: $5,00</p>
+            <a href="#" class="btn-primary">Finalizar compra</a>
+        </div>
+    </aside>
     <script src="js/main.js"></script>
 </body>
 </html>
