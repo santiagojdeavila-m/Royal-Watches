@@ -396,6 +396,9 @@ function renderizarCarrito() {
 
     let total = 0;
 
+    const estaEnSubcarpeta = window.location.pathname.includes("/pages/");
+    const prefijoRuta = estaEnSubcarpeta ? "../" : "";
+
     carrito.forEach(function (item) {
         total = total + (item.precio * item.cantidad);
 
@@ -403,7 +406,7 @@ function renderizarCarrito() {
         divItem.classList.add("carrito-item");
 
         divItem.innerHTML = `
-            <img src="../${item.imagen}" alt="${item.nombre}">
+            <img src="${prefijoRuta}${item.imagen}" alt="${item.nombre}">
             <div class="carrito-item-info">
                 <h4>${item.nombre}</h4>
                 <p class="carrito-item-precio">$${item.precio},00</p>
