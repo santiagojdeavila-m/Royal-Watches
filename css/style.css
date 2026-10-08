@@ -24,12 +24,11 @@ header {
 
 header img {
     max-width: 60px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s;
 }
 
 header img:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 8px gold;
+    transform: scale(1.15);
 }
 
 nav ul {
