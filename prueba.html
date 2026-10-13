@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de formulario</title>
+    <style>
+        .mensaje-error {
+            color: red;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <form id="form-registro">
+        <input type="text" id="registro-nombre" placeholder="Nombre">
+        <p id="error-registro-nombre" class="mensaje-error"></p>
+
+        <input type="text" id="registro-correo" placeholder="Correo">
+        <p id="error-registro-correo" class="mensaje-error"></p>
+
+        <input type="password" id="registro-password" placeholder="Contraseña">
+        <p id="error-registro-password" class="mensaje-error"></p>
+
+        <input type="password" id="registro-confirmar" placeholder="Confirmar contraseña">
+        <p id="error-registro-confirmar" class="mensaje-error"></p>
+
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <script>
+        const formulario = document.querySelector("#form-registro");
+        const campoNombre = document.querySelector("#registro-nombre");
+        const errorNombre = document.querySelector("#error-registro-nombre");
+        const campoCorreo = document.querySelector("#registro-correo");
+        const errorCorreo = document.querySelector("#error-registro-correo");
+        const campoPassword = document.querySelector("#registro-password");
+        const errorPassword = document.querySelector("#error-registro-password");
+        const campoConfirmar = document.querySelector("#registro-confirmar");
+        const errorConfirmar = document.querySelector("#error-registro-confirmar");
+
+        formulario.addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            const nombre = campoNombre.value.trim();
+            const correo = campoCorreo.value.trim();
+            const password = campoPassword.value;
+            const confirmar = campoConfirmar.value;
+
+            let hayErrores = false;
+
+            errorNombre.textContent = "";
+            errorCorreo.textContent = "";
+            errorPassword.textContent = "";
+            errorConfirmar.textContent = "";
+
+            if (nombre === "") {
+                errorNombre.textContent = "El nombre es obligatorio";
+                hayErrores = true;
+            }
+
+            if (correo === "") {
+                errorCorreo.textContent = "El correo es obligatorio";
+                hayErrores = true;
+            } else if (!correo.includes("@") || !correo.includes(".")) {
+                errorCorreo.textContent = "Escribe un correo válido";
+                hayErrores = true;
+            }
+
+            if (password === "") {
+                errorPassword.textContent = "La contraseña es obligatoria";
+                hayErrores = true;
+            } else if (password.length < 6) {
+                errorPassword.textContent = "La contraseña debe tener al menos 6 caracteres";
+                hayErrores = true;
+            }
+
+            if (confirmar !== password) {
+                errorConfirmar.textContent = "Las contraseñas no coinciden";
+                hayErrores = true;
+            }
+
+            if (hayErrores) {
+                return;
+            }
+
+            console.log("Registro válido");
+        });
+
+        campoNombre.addEventListener("input", function() {
+            errorNombre.textContent = "";
+        });
+
+        campoCorreo.addEventListener("input", function() {
+            errorCorreo.textContent = "";
+        });
+
+        campoPassword.addEventListener("input", function() {
+            errorPassword.textContent = "";
+        });
+
+        campoConfirmar.addEventListener("input", function() {
+            errorConfirmar.textContent = "";
+        });
+    </script>
+</body>
+</html>
