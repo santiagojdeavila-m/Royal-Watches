@@ -708,3 +708,22 @@ footer {
 .auth-enlaces a:hover {
     text-decoration: underline;
 }
+
+.auth-card-ancha {
+    max-width: 640px;
+    padding: 24px 32px;
+}
+
+.auth-card-ancha .auth-subtitulo {
+    margin-bottom: 16px;
+}
+
+.auth-card-ancha .auth-enlaces {
+    margin-top: 16px;
+}
+
+.form-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+}

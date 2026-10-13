@@ -27,33 +27,37 @@
     </header>
     <main>
         <section class="auth">
-            <div class="auth-card">
+            <div class="auth-card auth-card-ancha">
                 <h1>Crear Cuenta</h1>
                 <p class="auth-subtitulo">Regístrate para comprar y guardar tu carrito.</p>
 
                 <form id="form-registro" novalidate>
-                    <div class="form-grupo">
-                        <label for="registro-nombre">Nombre completo</label>
-                        <input type="text" id="registro-nombre" name="nombre" placeholder="Tu nombre">
-                        <p class="mensaje-error" id="error-registro-nombre"></p>
+                    <div class="form-fila">
+                        <div class="form-grupo">
+                            <label for="registro-nombre">Nombre completo</label>
+                            <input type="text" id="registro-nombre" name="nombre" placeholder="Tu nombre">
+                            <p class="mensaje-error" id="error-registro-nombre"></p>
+                        </div>
+
+                        <div class="form-grupo">
+                            <label for="registro-correo">Correo electrónico</label>
+                            <input type="email" id="registro-correo" name="correo" placeholder="tucorreo@ejemplo.com">
+                            <p class="mensaje-error" id="error-registro-correo"></p>
+                        </div>
                     </div>
 
-                    <div class="form-grupo">
-                        <label for="registro-correo">Correo electrónico</label>
-                        <input type="email" id="registro-correo" name="correo" placeholder="tucorreo@ejemplo.com">
-                        <p class="mensaje-error" id="error-registro-correo"></p>
-                    </div>
+                    <div class="form-fila">
+                        <div class="form-grupo">
+                            <label for="registro-password">Contraseña</label>
+                            <input type="password" id="registro-password" name="password" placeholder="Crea una contraseña">
+                            <p class="mensaje-error" id="error-registro-password"></p>
+                        </div>
 
-                    <div class="form-grupo">
-                        <label for="registro-password">Contraseña</label>
-                        <input type="password" id="registro-password" name="password" placeholder="Crea una contraseña">
-                        <p class="mensaje-error" id="error-registro-password"></p>
-                    </div>
-
-                    <div class="form-grupo">
-                        <label for="registro-confirmar">Confirmar contraseña</label>
-                        <input type="password" id="registro-confirmar" name="confirmar-password" placeholder="Repite tu contraseña">
-                        <p class="mensaje-error" id="error-registro-confirmar"></p>
+                        <div class="form-grupo">
+                            <label for="registro-confirmar">Confirmar contraseña</label>
+                            <input type="password" id="registro-confirmar" name="confirmar-password" placeholder="Repite tu contraseña">
+                            <p class="mensaje-error" id="error-registro-confirmar"></p>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn-primary btn-auth">Crear cuenta</button>
