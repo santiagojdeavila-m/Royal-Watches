@@ -314,4 +314,16 @@
         width: 100%;
         text-align: center;
     }
+
+    .auth {
+        padding: 24px 5%;
+    }
+
+    .auth-card {
+        padding: 24px 20px;
+    }
+
+    .auth-card h1 {
+        font-size: 1.7rem;
+    }    
 }
