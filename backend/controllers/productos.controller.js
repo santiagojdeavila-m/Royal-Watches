@@ -1,12 +1,21 @@
-// TEMPORAL: José reemplaza el cuerpo de estas funciones con la lógica real.
-// Los nombres de las funciones son el contrato y no deben cambiar.
+const productos = require("../data/productos");
 
 function obtenerProductos(req, res) {
-    res.json({ mensaje: "pendiente: lista de productos" });
+    res.json(productos);
 }
 
 function obtenerProductoPorId(req, res) {
-    res.json({ mensaje: "pendiente: producto " + req.params.id });
+    const id = Number(req.params.id);
+
+    const producto = productos.find(function (p) {
+        return p.id === id;
+    });
+
+    if (!producto) {
+        return res.status(404).json({ mensaje: "Producto no encontrado" });
+    }
+
+    res.json(producto);
 }
 
 module.exports = { obtenerProductos, obtenerProductoPorId };
