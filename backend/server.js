@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require("express");
+const conectarBD = require("./config/db");
 const productosRoutes = require("./routes/productos.routes");
 
 const app = express();
@@ -13,6 +15,8 @@ app.get("/api/salud", function (req, res) {
 });
 
 app.use("/api/productos", productosRoutes);
+
+conectarBD();
 
 app.listen(PUERTO, function () {
     console.log("Servidor escuchando en http://localhost:" + PUERTO);
