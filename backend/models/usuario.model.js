@@ -30,9 +30,54 @@ const usuarioSchema = new mongoose.Schema(
             select: false
         }
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toJSON: {
+            versionKey: false,
+            transform: function (doc, ret) {
+                ret.id = ret._id.toString();
+                delete ret._id;
+                return ret;
+            }
+        }
+    }
 );
 
 const Usuario = mongoose.model("Usuario", usuarioSchema, "usuarios");
 
-module.exports = Usuario;
+async function crearUsuario(datos) {
+    return Usuario.create(datos);
+}
+
+async function listarUsuarios() {
+    return Usuario.find().sort({ createdAt: -1 });
+}
+
+async function obtenerUsuarioPorId(id) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Usuario.findById(id);
+}
+
+async function actualizarUsuario(id, cambios) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Usuario.findByIdAndUpdate(id, cambios, { new: true, runValidators: true });
+}
+
+async function eliminarUsuario(id) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Usuario.findByIdAndDelete(id);
+}
+
+module.exports = {
+    crearUsuario,
+    listarUsuarios,
+    obtenerUsuarioPorId,
+    actualizarUsuario,
+    eliminarUsuario
+};
