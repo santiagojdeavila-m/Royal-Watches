@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de usuarios | Royal Watches</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <main class="auth">
+        <div class="auth-card auth-card-ancha">
+            <h1>Usuarios de prueba</h1>
+            <p class="auth-subtitulo">Herramienta de desarrollo: habla con el backend en localhost:4000.</p>
+
+            <form id="form-usuario-prueba" novalidate>
+                <div class="form-fila">
+                    <div class="form-grupo">
+                        <label for="prueba-nombre">Nombre</label>
+                        <input type="text" id="prueba-nombre" name="nombre" placeholder="Nombre">
+                    </div>
+                    <div class="form-grupo">
+                        <label for="prueba-correo">Correo</label>
+                        <input type="email" id="prueba-correo" name="correo" placeholder="correo@ejemplo.com">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary btn-auth">Registrar usuario</button>
+            </form>
+
+            <p class="mensaje-error" id="prueba-mensaje"></p>
+
+            <ul class="lista-usuarios" id="lista-usuarios"></ul>
+        </div>
+    </main>
+    <script src="../js/prueba-usuarios.js"></script>
+</body>
+</html>

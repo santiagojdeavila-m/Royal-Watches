@@ -3,9 +3,19 @@ const express = require("express");
 const conectarBD = require("./config/db");
 const productosRoutes = require("./routes/productos.routes");
 const usuariosRoutes = require("./routes/usuarios.routes");
+const cors = require("cors");
 
 const app = express();
 const PUERTO = 4000;
+
+app.use(cors({
+    origin: [
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+    ]
+}));
 
 app.use(express.json());
 
