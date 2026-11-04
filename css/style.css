@@ -727,3 +727,40 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 0 16px;
 }
+
+.lista-usuarios {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0 0;
+}
+
+.usuario-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.85rem;
+}
+
+.usuario-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.usuario-acciones button {
+    background: none;
+    border: 1px solid #444;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.usuario-acciones button:hover {
+    border-color: gold;
+    color: gold;
+}
