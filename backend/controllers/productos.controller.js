@@ -1,21 +1,29 @@
-const productos = require("../data/productos");
+const productosModel = require("../models/producto.model");
 
-function obtenerProductos(req, res) {
-    res.json(productos);
+function manejarError(error, res) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error interno del servidor" });
 }
 
-function obtenerProductoPorId(req, res) {
-    const id = Number(req.params.id);
-
-    const producto = productos.find(function (p) {
-        return p.id === id;
-    });
-
-    if (!producto) {
-        return res.status(404).json({ mensaje: "Producto no encontrado" });
+async function obtenerProductos(req, res) {
+    try {
+        const productos = await productosModel.listarProductos();
+        res.json(productos);
+    } catch (error) {
+        manejarError(error, res);
     }
+}
 
-    res.json(producto);
+async function obtenerProductoPorId(req, res) {
+    try {
+        const producto = await productosModel.obtenerProductoPorId(req.params.id);
+        if (!producto) {
+            return res.status(404).json({ mensaje: "Producto no encontrado" });
+        }
+        res.json(producto);
+    } catch (error) {
+        manejarError(error, res);
+    }
 }
 
 module.exports = { obtenerProductos, obtenerProductoPorId };

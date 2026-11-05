@@ -33,9 +33,43 @@ const productoSchema = new mongoose.Schema(
         }
     },
     {
-        collection: "productos",
-        timestamps: { createdAt: "creadoEn", updatedAt: "actualizadoEn" }
+        timestamps: true,
+        toJSON: {
+            versionKey: false,
+            transform: function (doc, ret) {
+                ret.id = ret._id.toString();
+                delete ret._id;
+                return ret;
+            }
+        }
     }
 );
 
-module.exports = mongoose.model("Producto", productoSchema);
+const Producto = mongoose.model("Producto", productoSchema, "productos");
+
+async function listarProductos() {
+    return Producto.find().sort({ _id: 1 });
+}
+
+async function obtenerProductoPorId(id) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Producto.findById(id);
+}
+
+async function sembrarProductos(lista) {
+    for (const datos of lista) {
+        await Producto.findOneAndUpdate(
+            { nombre: datos.nombre },
+            datos,
+            { upsert: true, runValidators: true, setDefaultsOnInsert: true }
+        );
+    }
+}
+
+module.exports = {
+    listarProductos,
+    obtenerProductoPorId,
+    sembrarProductos
+};
