@@ -68,8 +68,29 @@ async function sembrarProductos(lista) {
     }
 }
 
+async function crearProducto(datos) {
+    return Producto.create(datos);
+}
+
+async function actualizarProducto(id, cambios) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Producto.findByIdAndUpdate(id, cambios, { new: true, runValidators: true });
+}
+
+async function eliminarProducto(id) {
+    if (!mongoose.isValidObjectId(id)) {
+        return null;
+    }
+    return Producto.findByIdAndDelete(id);
+}
+
 module.exports = {
     listarProductos,
     obtenerProductoPorId,
-    sembrarProductos
+    sembrarProductos,
+    crearProducto,
+    actualizarProducto,
+    eliminarProducto
 };
