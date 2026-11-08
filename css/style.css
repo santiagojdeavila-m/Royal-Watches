@@ -764,3 +764,46 @@ footer {
     border-color: gold;
     color: gold;
 }
+.lista-productos {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0 0;
+}
+
+.producto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.85rem;
+}
+
+.producto-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.producto-acciones button {
+    background-color: #222;
+    border: 1px solid #444;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.producto-acciones button:hover {
+    border-color: gold;
+    color: gold;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
