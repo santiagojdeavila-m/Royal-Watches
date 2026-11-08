@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const ROLES = ["cliente", "admin"];
+
 const usuarioSchema = new mongoose.Schema(
     {
         nombre: {
@@ -20,7 +22,7 @@ const usuarioSchema = new mongoose.Schema(
         rol: {
             type: String,
             enum: {
-                values: ["cliente", "admin"],
+                values: ROLES,
                 message: "El rol debe ser cliente o admin"
             },
             default: "cliente"
@@ -49,8 +51,8 @@ async function crearUsuario(datos) {
     return Usuario.create(datos);
 }
 
-async function listarUsuarios() {
-    return Usuario.find().sort({ createdAt: -1 });
+async function listarUsuarios(filtro = {}) {
+    return Usuario.find(filtro).sort({ createdAt: -1 });
 }
 
 async function obtenerUsuarioPorId(id) {
@@ -75,6 +77,7 @@ async function eliminarUsuario(id) {
 }
 
 module.exports = {
+    ROLES,
     crearUsuario,
     listarUsuarios,
     obtenerUsuarioPorId,
