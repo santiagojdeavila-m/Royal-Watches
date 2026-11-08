@@ -31,7 +31,17 @@ async function crearUsuario(req, res) {
 
 async function listarUsuarios(req, res) {
     try {
-        const usuarios = await usuariosModel.listarUsuarios();
+        const filtro = {};
+        const rol = req.query.rol;
+
+        if (rol !== undefined) {
+            if (!usuariosModel.ROLES.includes(rol)) {
+                return res.status(400).json({ mensaje: "El rol debe ser cliente o admin" });
+            }
+            filtro.rol = rol;
+        }
+
+        const usuarios = await usuariosModel.listarUsuarios(filtro);
         res.json(usuarios);
     } catch (error) {
         manejarError(error, res);
