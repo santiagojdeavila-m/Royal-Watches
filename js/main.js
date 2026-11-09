@@ -116,7 +116,7 @@ const productos = [
         nombre: "Patek Philippe Calatrava",
         marca: "Patek Philippe",
         precio: 879000,
-        imagen: "img/img-catalogo/PatekPhilippe_Calatrava.png",
+        imagen: "img/img-catalogo/PatekPhilippe_Calatrava.webp",
         descripcion: "El reloj de vestir por excelencia, pura elegancia clásica.",
         destacado: false
     },
