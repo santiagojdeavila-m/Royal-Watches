@@ -1,3 +1,4 @@
+const API_URL = "http://localhost:4000";
 function validarLogin() {
     const formulario = document.querySelector("#form-login");
 
@@ -65,8 +66,11 @@ function validarRegistro() {
     const errorPassword = document.querySelector("#error-registro-password");
     const campoConfirmar = document.querySelector("#registro-confirmar");
     const errorConfirmar = document.querySelector("#error-registro-confirmar");
+    const errorGeneral = document.querySelector("#error-registro-general");
+    const mensajeExito = document.querySelector("#exito-registro");
+    const botonEnviar = formulario.querySelector("button[type='submit']");
 
-    formulario.addEventListener("submit", function(evento) {
+    formulario.addEventListener("submit", async function(evento) {
         evento.preventDefault();
 
         const nombre = campoNombre.value.trim();
@@ -80,6 +84,8 @@ function validarRegistro() {
         errorCorreo.textContent = "";
         errorPassword.textContent = "";
         errorConfirmar.textContent = "";
+        errorGeneral.textContent = "";
+        mensajeExito.textContent = "";
 
         if (nombre === "") {
             errorNombre.textContent = "El nombre es obligatorio";
@@ -97,8 +103,8 @@ function validarRegistro() {
         if (password === "") {
             errorPassword.textContent = "La contraseña es obligatoria";
             hayErrores = true;
-        } else if (password.length < 6) {
-            errorPassword.textContent = "La contraseña debe tener al menos 6 caracteres";
+        } else if (password.length < 8) {
+            errorPassword.textContent = "La contraseña debe tener al menos 8 caracteres";
             hayErrores = true;
         }
 
@@ -111,7 +117,53 @@ function validarRegistro() {
             return;
         }
 
-        console.log("Registro válido:", nombre, correo);
+        botonEnviar.disabled = true;
+        botonEnviar.textContent = "Creando cuenta...";
+
+        try {
+            const respuesta = await fetch(API_URL + "/api/auth/registro", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    correo: correo,
+                    password: password
+                })
+            });
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                const errores = datos.errores || {};
+
+                if (errores.nombre) {
+                    errorNombre.textContent = errores.nombre;
+                }
+                if (errores.correo) {
+                    errorCorreo.textContent = errores.correo;
+                }
+                if (errores.password) {
+                    errorPassword.textContent = errores.password;
+                }
+                if (Object.keys(errores).length === 0) {
+                    errorGeneral.textContent = datos.mensaje || "No se pudo crear la cuenta";
+                }
+                return;
+            }
+
+            mensajeExito.textContent = "Cuenta creada. Te llevamos al inicio de sesión...";
+            formulario.reset();
+
+            setTimeout(function () {
+                window.location.href = "login.html";
+            }, 1500);
+
+        } catch (error) {
+            errorGeneral.textContent = "No pudimos conectar con el servidor. Inténtalo de nuevo.";
+        } finally {
+            botonEnviar.disabled = false;
+            botonEnviar.textContent = "Crear cuenta";
+        }
     });
 
     campoNombre.addEventListener("input", function() {
