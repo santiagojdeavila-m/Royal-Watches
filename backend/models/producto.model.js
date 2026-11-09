@@ -76,7 +76,7 @@ async function actualizarProducto(id, cambios) {
     if (!mongoose.isValidObjectId(id)) {
         return null;
     }
-    return Producto.findByIdAndUpdate(id, cambios, { new: true, runValidators: true });
+    return Producto.findByIdAndUpdate(id, cambios, { returnDocument: 'after', runValidators: true });
 }
 
 async function eliminarProducto(id) {

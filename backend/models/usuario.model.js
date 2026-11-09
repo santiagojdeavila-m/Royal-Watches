@@ -66,7 +66,7 @@ async function actualizarUsuario(id, cambios) {
     if (!mongoose.isValidObjectId(id)) {
         return null;
     }
-    return Usuario.findByIdAndUpdate(id, cambios, { new: true, runValidators: true });
+    return Usuario.findByIdAndUpdate(id, cambios, { returnDocument: 'after', runValidators: true });
 }
 
 async function eliminarUsuario(id) {

@@ -30,8 +30,30 @@ app.get("/api/salud", function (req, res) {
 app.use("/api/productos", productosRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 
-conectarBD();
-
-app.listen(PUERTO, function () {
-    console.log("Servidor escuchando en http://localhost:" + PUERTO);
+app.use(function (req, res) {
+    res.status(404).json({ mensaje: "Ruta no encontrada" });
 });
+
+app.use(function (error, req, res, next) {
+    if (error.type === "entity.parse.failed") {
+        return res.status(400).json({ mensaje: "El cuerpo de la petición no es un JSON válido" });
+    }
+    console.error(error);
+    res.status(500).json({ mensaje: "Error interno del servidor" });
+});
+
+async function iniciarServidor() {
+    try {
+        await conectarBD();
+
+        app.listen(PUERTO, function () {
+            console.log("Servidor escuchando en http://localhost:" + PUERTO);
+        });
+
+    } catch (error) {
+        console.error("Error al iniciar el servidor:", error.message);
+        process.exit(1);
+    }
+}
+
+iniciarServidor();

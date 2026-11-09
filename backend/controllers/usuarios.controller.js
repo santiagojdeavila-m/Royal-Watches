@@ -8,6 +8,10 @@ function manejarError(error, res) {
         return res.status(400).json({ mensaje: "Datos inválidos", errores: mensajes });
     }
 
+    if (error.name === "CastError") {
+        return res.status(400).json({ mensaje: "Algún dato tiene un formato inválido" });
+    }
+
     if (error.code === 11000) {
         return res.status(409).json({ mensaje: "Ese correo ya está registrado" });
     }

@@ -1,4 +1,9 @@
 {
+    "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "seed": "node seed/productos.seed.js"
+  },
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^18.0.9",

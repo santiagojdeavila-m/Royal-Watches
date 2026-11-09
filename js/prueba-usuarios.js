@@ -51,8 +51,9 @@ async function cargarUsuarios() {
     } catch (error) {
         mostrarMensaje("No se pudo conectar con el servidor. ¿Está encendido?", true);
     }
+}
 
-    async function enviarCambio(url, metodo, cuerpo) {
+async function enviarCambio(url, metodo, cuerpo) {
     try {
         const opciones = { method: metodo };
 
@@ -76,6 +77,7 @@ async function cargarUsuarios() {
         mostrarMensaje("No se pudo conectar con el servidor. ¿Está encendido?", true);
     }
 }
+
 
 lista.addEventListener("click", function (event) {
     const boton = event.target;
@@ -106,7 +108,6 @@ lista.addEventListener("click", function (event) {
         enviarCambio(url, "PATCH", { nombre: nuevoNombre, correo: nuevoCorreo });
     }
 });
-}
 
 formulario.addEventListener("submit", async function (event) {
     event.preventDefault();

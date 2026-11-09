@@ -14,11 +14,12 @@ navLinks.forEach(function (link) {
         nav.classList.remove("nav-active");
     });
 })
+
 const productos = [
     {
         nombre: "Rolex Submariner",
         marca: "Rolex",
-        precio: 5,
+        precio: 899000,
         imagen: "img/img-catalogo/Rolex_Submariner.png",
         descripcion: "Icónico reloj de buceo, resistente al agua hasta 300 metros.",
         destacado: true
@@ -26,7 +27,7 @@ const productos = [
     {
         nombre: "Rolex Datejust",
         marca: "Rolex",
-        precio: 2,
+        precio: 749000,
         imagen: "img/img-catalogo/Rolex_Datejust.png",
         descripcion: "Clásico atemporal con ventanilla de fecha, símbolo de elegancia.",
         destacado: false
@@ -34,7 +35,7 @@ const productos = [
     {
         nombre: "Rolex GMT-Master II",
         marca: "Rolex",
-        precio: 3,
+        precio: 849000,
         imagen: "img/img-catalogo/Rolex_GMT-Master2.png",
         descripcion: "Diseñado para viajeros, muestra dos husos horarios a la vez.",
         destacado: false
@@ -42,7 +43,7 @@ const productos = [
     {
         nombre: "Rolex Daytona",
         marca: "Rolex",
-        precio: 1,
+        precio: 879000,
         imagen: "img/img-catalogo/Rolex_Daytona.png",
         descripcion: "Cronógrafo de precisión, inspirado en el mundo del automovilismo.",
         destacado: false
@@ -50,7 +51,7 @@ const productos = [
     {
         nombre: "Hublot Big Bang Unico",
         marca: "Hublot",
-        precio: 0,
+        precio: 929000,
         imagen: "img/img-catalogo/Hublot_BigBangUnico.png",
         descripcion: "Fusión de materiales de vanguardia con diseño audaz y deportivo.",
         destacado: true
@@ -58,7 +59,7 @@ const productos = [
     {
         nombre: "Hublot Classic Fusion",
         marca: "Hublot",
-        precio: 4,
+        precio: 799000,
         imagen: "img/img-catalogo/Hublot_ClassicFusion.png",
         descripcion: "Líneas minimalistas y elegantes, con un toque contemporáneo.",
         destacado: false
@@ -66,7 +67,7 @@ const productos = [
     {
         nombre: "Hublot Spirit of Big Bang",
         marca: "Hublot",
-        precio: 6,
+        precio: 899000,
         imagen: "img/img-catalogo/Hublot_SpiritBigBang.png",
         descripcion: "Caja tonneau distintiva, potencia visual y carácter deportivo.",
         destacado: false
@@ -74,7 +75,7 @@ const productos = [
     {
         nombre: "Richard Mille RM011",
         marca: "Richard Mille",
-        precio: 0,
+        precio: 979000,
         imagen: "img/img-catalogo/RichardMille_RM011.png",
         descripcion: "Alta relojería de edición limitada, precisión y diseño de vanguardia.",
         destacado: true
@@ -82,7 +83,7 @@ const productos = [
     {
         nombre: "Richard Mille RM035",
         marca: "Richard Mille",
-        precio: 0,
+        precio: 949000,
         imagen: "img/img-catalogo/RichardMille_RM035.png",
         descripcion: "Ultraligero y resistente, pensado para el máximo rendimiento.",
         destacado: false
@@ -90,7 +91,7 @@ const productos = [
     {
         nombre: "Richard Mille RM27-02",
         marca: "Richard Mille",
-        precio: 0,
+        precio: 989000,
         imagen: "img/img-catalogo/RichardMille_RM27-02.png",
         descripcion: "Ingeniería extrema en un reloj de altísima gama deportiva.",
         destacado: false
@@ -98,7 +99,7 @@ const productos = [
     {
         nombre: "Patek Philippe Nautilus",
         marca: "Patek Philippe",
-        precio: 0,
+        precio: 959000,
         imagen: "img/img-catalogo/PatekPhilippe_Nautilus.webp",
         descripcion: "Elegancia atemporal con el icónico bisel octagonal y brazalete integrado.",
         destacado: true
@@ -106,7 +107,7 @@ const productos = [
     {
         nombre: "Patek Philippe Aquanaut",
         marca: "Patek Philippe",
-        precio: 0,
+        precio: 919000,
         imagen: "img/img-catalogo/PatekPhilippe_Aquanaut.webp",
         descripcion: "Estilo deportivo y moderno, con correa de caucho característica.",
         destacado: false
@@ -114,15 +115,15 @@ const productos = [
     {
         nombre: "Patek Philippe Calatrava",
         marca: "Patek Philippe",
-        precio: 0,
-        imagen: "img/img-catalogo/PatekPhilippe_Calatrava.webp",
+        precio: 879000,
+        imagen: "img/img-catalogo/PatekPhilippe_Calatrava.png",
         descripcion: "El reloj de vestir por excelencia, pura elegancia clásica.",
         destacado: false
     },
     {
         nombre: "Cartier Santos",
         marca: "Cartier",
-        precio: 0,
+        precio: 699000,
         imagen: "img/img-catalogo/Cartier_Santos.png",
         descripcion: "Diseño cuadrado inconfundible, símbolo de estilo desde 1904.",
         destacado: true
@@ -130,7 +131,7 @@ const productos = [
     {
         nombre: "Cartier Tank",
         marca: "Cartier",
-        precio: 0,
+        precio: 649000,
         imagen: "img/img-catalogo/Cartier_Tank.png",
         descripcion: "Silueta rectangular icónica, un ícono absoluto de la relojería.",
         destacado: false
@@ -138,7 +139,7 @@ const productos = [
     {
         nombre: "Cartier Ballon Bleu",
         marca: "Cartier",
-        precio: 0,
+        precio: 729000,
         imagen: "img/img-catalogo/Cartier_BallonBleu.png",
         descripcion: "Caja redondeada y corona protegida, elegancia con carácter.",
         destacado: false
@@ -146,7 +147,7 @@ const productos = [
     {
         nombre: "Curren 8329",
         marca: "Curren",
-        precio: 0,
+        precio: 189000,
         imagen: "img/img-catalogo/Curren_8329.webp",
         descripcion: "Reloj de diseño moderno con detalles elegantes y funcionalidad avanzada.",
         destacado: true
@@ -154,7 +155,7 @@ const productos = [
     {
         nombre: "Curren 8380",
         marca: "Curren",
-        precio: 0,
+        precio: 159000,
         imagen: "img/img-catalogo/Curren_8380.webp",
         descripcion: "Estilo deportivo y casual, ideal para el uso diario.",
         destacado: false
@@ -162,7 +163,7 @@ const productos = [
     {
         nombre: "Curren 8404",
         marca: "Curren",
-        precio: 0,
+        precio: 179000,
         imagen: "img/img-catalogo/Curren_8404.webp",
         descripcion: "Diseño robusto en acero, con gran legibilidad.",
         destacado: false
@@ -170,7 +171,7 @@ const productos = [
     {
         nombre: "Curren 8225",
         marca: "Curren",
-        precio: 0,
+        precio: 149000,
         imagen: "img/img-catalogo/Curren_8225.webp",
         descripcion: "Reloj clásico y versátil, fácil de combinar con cualquier estilo.",
         destacado: false
@@ -179,6 +180,10 @@ const productos = [
 productos.forEach(function(producto) {
     console.log(producto.nombre);
 });
+
+function formatearPrecio(precio) {
+    return `$${precio.toLocaleString("es-CO")}`;
+}
 
 function renderizarProductos(selectorContenedor, listaProductos) {
     const contenedor = document.querySelector(selectorContenedor);
@@ -210,7 +215,7 @@ function renderizarProductos(selectorContenedor, listaProductos) {
                 <img src="${rutaImagen}" alt="${producto.nombre}" loading="lazy">
                 <h3>${producto.nombre}</h3>
                 ${descripcionHTML}
-                <p class="price">$${producto.precio},00</p>
+                <p class="price">${formatearPrecio(producto.precio)}</p>
             </a>
             <a href="#" class="btn-primary btn-agregar" data-nombre="${producto.nombre}">Agregar al carrito</a>
         `;
@@ -312,7 +317,7 @@ if (contenedorDetalle) {
                 <h1>${producto.nombre}</h1>
                 <p class="detalle-marca">${producto.marca}</p>
                 <p class="detalle-descripcion">${producto.descripcion}</p>
-                <p class="price">$${producto.precio},00</p>
+                <p class="price">${formatearPrecio(producto.precio)}</p>
                 <a href="#" class="btn-primary btn-agregar" data-nombre="${producto.nombre}">Agregar al carrito</a>
             </div>
         `;
@@ -409,7 +414,7 @@ function renderizarCarrito() {
             <img src="${prefijoRuta}${item.imagen}" alt="${item.nombre}">
             <div class="carrito-item-info">
                 <h4>${item.nombre}</h4>
-                <p class="carrito-item-precio">$${item.precio},00</p>
+                <p class="carrito-item-precio">${formatearPrecio(item.precio)}</p>
                 <div class="carrito-cantidad">
                     <button class="cantidad-menos" data-nombre="${item.nombre}">-</button>
                     <span>${item.cantidad}</span>
@@ -424,7 +429,7 @@ function renderizarCarrito() {
     const totalElemento = document.querySelector(".carrito-total");
 
     if (totalElemento) {
-        totalElemento.textContent = `Total: $${total},00`;
+        totalElemento.textContent = `Total: ${formatearPrecio(total)}`;
     }
 }
 
@@ -496,7 +501,20 @@ function cargarCarrito() {
     const textoGuardado = localStorage.getItem("carrito");
 
     if (textoGuardado) {
-        return JSON.parse(textoGuardado);
+        return JSON.parse(textoGuardado).map(function(item) {
+            const productoActual = productos.find(function(producto) {
+                return producto.nombre === item.nombre;
+            });
+
+            if (productoActual) {
+                return {
+                    ...item,
+                    precio: productoActual.precio
+                };
+            }
+
+            return item;
+        });
     }
 
     return [];
