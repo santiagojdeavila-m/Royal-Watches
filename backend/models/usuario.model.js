@@ -39,6 +39,7 @@ const usuarioSchema = new mongoose.Schema(
             transform: function (doc, ret) {
                 ret.id = ret._id.toString();
                 delete ret._id;
+                delete ret.passwordHash;
                 return ret;
             }
         }

@@ -3,6 +3,7 @@ const express = require("express");
 const conectarBD = require("./config/db");
 const productosRoutes = require("./routes/productos.routes");
 const usuariosRoutes = require("./routes/usuarios.routes");
+const authRoutes = require("./routes/auth.routes");
 const cors = require("cors");
 
 const app = express();
@@ -29,6 +30,7 @@ app.get("/api/salud", function (req, res) {
 
 app.use("/api/productos", productosRoutes);
 app.use("/api/usuarios", usuariosRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use(function (req, res) {
     res.status(404).json({ mensaje: "Ruta no encontrada" });
