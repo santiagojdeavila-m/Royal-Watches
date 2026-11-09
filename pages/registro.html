@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,13 @@
     <meta name="description" content="Crea una cuenta en Royal Watches para acceder a beneficios exclusivos.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
 <body>
     <header>
         <a href="../index.html"><img src="../img/logo.png" alt="Logo oficial de Royal Watches header"></a>
@@ -49,19 +53,23 @@
                     <div class="form-fila">
                         <div class="form-grupo">
                             <label for="registro-password">Contraseña</label>
-                            <input type="password" id="registro-password" name="password" placeholder="Crea una contraseña">
+                            <input type="password" id="registro-password" name="password"
+                                placeholder="Mínimo 8 caracteres">
                             <p class="mensaje-error" id="error-registro-password"></p>
                         </div>
 
                         <div class="form-grupo">
                             <label for="registro-confirmar">Confirmar contraseña</label>
-                            <input type="password" id="registro-confirmar" name="confirmar-password" placeholder="Repite tu contraseña">
+                            <input type="password" id="registro-confirmar" name="confirmar-password"
+                                placeholder="Repite tu contraseña">
                             <p class="mensaje-error" id="error-registro-confirmar"></p>
                         </div>
                     </div>
+                    <p class="mensaje-error" id="error-registro-general"></p>
 
                     <button type="submit" class="btn-primary btn-auth">Crear cuenta</button>
                 </form>
+                <p class="mensaje-exito" id="exito-registro"></p>
 
                 <div class="auth-enlaces">
                     <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
@@ -85,9 +93,9 @@
         <div class="footer-col" id="contacto">
             <h3>Contacto</h3>
             <p>correo@royalwatches.com</p>
-            <p>300 000 0000</p>     
-        </div> 
-         <p class="footer-copyright">&copy; 2026 Royal Watches. Todos los derechos reservados.</p>
+            <p>300 000 0000</p>
+        </div>
+        <p class="footer-copyright">&copy; 2026 Royal Watches. Todos los derechos reservados.</p>
     </footer>
     <div class="carrito-overlay"></div>
 
@@ -97,7 +105,7 @@
             <button class="carrito-cerrar">✕</button>
         </div>
         <div class="carrito-items">
-            
+
         </div>
         <div class="carrito-footer">
             <p class="carrito-total">Total: $0,00</p>
@@ -107,4 +115,5 @@
     <script src="../js/main.js"></script>
     <script src="../js/validaciones.js"></script>
 </body>
+
 </html>
