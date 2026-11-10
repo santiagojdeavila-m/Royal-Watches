@@ -106,4 +106,8 @@ async function iniciarSesion(req, res) {
     }
 }
 
-module.exports = { registrar, iniciarSesion };
+function perfil(req, res) {
+    res.json({ usuario: req.usuario });
+}
+
+module.exports = { registrar, iniciarSesion, perfil };
