@@ -1,5 +1,6 @@
 const usuariosModel = require("../models/usuario.model");
 const { hashearPassword, compararPassword } = require("../utils/password");
+const { firmarToken } = require("../utils/token");
 
 const REGEX_CORREO = /^\S+@\S+\.\S+$/;
 const PASSWORD_MINIMO = 8;
@@ -92,7 +93,13 @@ async function iniciarSesion(req, res) {
             return res.status(401).json({ mensaje: MENSAJE_CREDENCIALES });
         }
 
-        res.json({ mensaje: "Inicio de sesión correcto", usuario: usuario });
+        const token = firmarToken(usuario);
+
+        res.json({
+            mensaje: "Inicio de sesión correcto",
+            token: token,
+            usuario: usuario
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: "Error interno del servidor" });
