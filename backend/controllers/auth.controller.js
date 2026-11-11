@@ -1,5 +1,6 @@
 const usuariosModel = require("../models/usuario.model");
 const { hashearPassword } = require("../utils/password");
+const { evaluarPassword } = require("../utils/passwordRules"); 
 
 const REGEX_CORREO = /^\S+@\S+\.\S+$/;
 const PASSWORD_MINIMO = 8;
@@ -26,6 +27,12 @@ function validarRegistro(nombre, correo, password) {
         errores.password = "La contraseña debe tener al menos 8 caracteres";
     } else if (Buffer.byteLength(password, "utf8") > PASSWORD_MAXIMO_BYTES) {
         errores.password = "La contraseña es demasiado larga";
+    } else {
+        const problema = evaluarPassword(password, correo);
+
+        if (problema) {
+            errores.password = problema;
+        }
     }
 
     return errores;
