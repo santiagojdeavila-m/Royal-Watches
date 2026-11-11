@@ -1,4 +1,5 @@
 const usuariosModel = require("../models/usuario.model");
+const { evaluarPassword } = require("../utils/passwordRules"); 
 const { hashearPassword, compararPassword } = require("../utils/password");
 const { firmarToken } = require("../utils/token");
 
@@ -28,6 +29,12 @@ function validarRegistro(nombre, correo, password) {
         errores.password = "La contraseña debe tener al menos 8 caracteres";
     } else if (Buffer.byteLength(password, "utf8") > PASSWORD_MAXIMO_BYTES) {
         errores.password = "La contraseña es demasiado larga";
+    } else {
+        const problema = evaluarPassword(password, correo);
+
+        if (problema) {
+            errores.password = problema;
+        }
     }
 
     return errores;
