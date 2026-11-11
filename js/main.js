@@ -624,3 +624,27 @@ function actualizarEncabezado() {
 }
 
 actualizarEncabezado();
+
+const botonesVerPassword = document.querySelectorAll(".btn-ver-password");
+
+botonesVerPassword.forEach(function (boton) {
+    boton.addEventListener("click", function () {
+        const campo = document.getElementById(boton.dataset.objetivo);
+
+        if (!campo) {
+            return;
+        }
+
+        const mostrar = campo.type === "password";
+
+        campo.type = mostrar ? "text" : "password";
+        boton.textContent = mostrar ? "Ocultar" : "Mostrar";
+
+        boton.setAttribute(
+            "aria-label",
+            mostrar ? "Ocultar contraseña" : "Mostrar contraseña"
+        );
+
+        boton.setAttribute("aria-pressed", String(mostrar));
+    });
+});
