@@ -63,6 +63,10 @@ async function obtenerUsuarioPorId(id) {
     return Usuario.findById(id);
 }
 
+async function obtenerUsuarioParaLogin(correo) {
+    return Usuario.findOne({ correo: correo }).select("+passwordHash");
+}
+
 async function actualizarUsuario(id, cambios) {
     if (!mongoose.isValidObjectId(id)) {
         return null;
@@ -82,6 +86,7 @@ module.exports = {
     crearUsuario,
     listarUsuarios,
     obtenerUsuarioPorId,
+    obtenerUsuarioParaLogin,
     actualizarUsuario,
     eliminarUsuario
 };
