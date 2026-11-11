@@ -13,20 +13,11 @@
         <div class="auth-card auth-card-ancha">
             <h1>Usuarios de prueba</h1>
             <p class="auth-subtitulo">Herramienta de desarrollo: habla con el backend en localhost:4000.</p>
+            <p class="auth-subtitulo" id="prueba-sesion"></p>
 
-            <form id="form-usuario-prueba" novalidate>
-                <div class="form-fila">
-                    <div class="form-grupo">
-                        <label for="prueba-nombre">Nombre</label>
-                        <input type="text" id="prueba-nombre" name="nombre" placeholder="Nombre">
-                    </div>
-                    <div class="form-grupo">
-                        <label for="prueba-correo">Correo</label>
-                        <input type="email" id="prueba-correo" name="correo" placeholder="correo@ejemplo.com">
-                    </div>
-                </div>
-                <button type="submit" class="btn-primary btn-auth">Registrar usuario</button>
-            </form>
+            <div class="auth-enlaces">
+                <p>Para crear cuentas usa el <a href="registro.html">formulario de registro</a>. Esta página lista, edita y elimina usuarios, y solo funciona con una sesión de administrador.</p>
+            </div>
 
             <p class="mensaje-error" id="prueba-mensaje"></p>
 
