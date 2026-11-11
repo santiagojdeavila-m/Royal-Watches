@@ -223,6 +223,68 @@ function validarRegistro() {
     });
 }
 
+const PASSWORDS_COMUNES = [
+    "12345678", "123456789", "1234567890", "11111111", "00000000",
+    "12341234", "87654321", "123123123", "password", "password1",
+    "password123", "qwerty123", "qwertyuiop", "abc12345", "contraseña",
+    "contrasena", "iloveyou", "admin123", "letmein1", "welcome1"
+];
+const PASSWORD_LARGO_MINIMO = 8;
+const LARGO_MINIMO_PARTE_CORREO = 4;
+
+function evaluarRequisitos(password, confirmar, correo) {
+    const minuscula = password.toLowerCase();
+    const parteCorreo = correo.trim().toLowerCase().split("@")[0];
+    const hayPassword = password !== "";
+
+    return {
+        largo: password.length >= PASSWORD_LARGO_MINIMO,
+        comun: hayPassword && !PASSWORDS_COMUNES.includes(minuscula),
+        correo: hayPassword && !(parteCorreo.length >= LARGO_MINIMO_PARTE_CORREO && minuscula.includes(parteCorreo)),
+        coincide: hayPassword && confirmar === password
+    };
+}
+
+function activarMejorasRegistro() {
+    const formulario = document.querySelector("#form-registro");
+
+    if (!formulario) {
+        return;
+    }
+
+    const campoCorreo = document.querySelector("#registro-correo");
+    const campoPassword = document.querySelector("#registro-password");
+    const campoConfirmar = document.querySelector("#registro-confirmar");
+    const lista = document.querySelector("#requisitos-password");
+
+    function actualizarRequisitos() {
+        const estado = evaluarRequisitos(campoPassword.value, campoConfirmar.value, campoCorreo.value);
+
+        lista.querySelectorAll("li").forEach(function (item) {
+            item.classList.toggle("cumplido", estado[item.dataset.requisito]);
+        });
+    }
+
+    [campoCorreo, campoPassword, campoConfirmar].forEach(function (campo) {
+        campo.addEventListener("input", actualizarRequisitos);
+    });
+
+    formulario.addEventListener("reset", function () {
+        setTimeout(actualizarRequisitos, 0);
+    });
+
+    formulario.querySelectorAll(".btn-ver-password").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            const campo = document.querySelector("#" + boton.dataset.objetivo);
+            const estabaOculta = campo.type === "password";
+
+            campo.type = estabaOculta ? "text" : "password";
+            boton.textContent = estabaOculta ? "Ocultar" : "Mostrar";
+            boton.setAttribute("aria-label", estabaOculta ? "Ocultar contraseña" : "Mostrar contraseña");
+        });
+    });
+}
+
 function validarRecuperar() {
     const formulario = document.querySelector("#form-recuperar");
 
@@ -269,3 +331,4 @@ function validarRecuperar() {
 validarLogin();
 validarRegistro();
 validarRecuperar();
+activarMejorasRegistro();

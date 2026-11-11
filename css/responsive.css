@@ -372,4 +372,8 @@
     .auth-card-ancha .auth-enlaces {
         margin-top: 12px;
     }
+
+    .requisitos-password {
+        grid-template-columns: 1fr;
+    }
 }

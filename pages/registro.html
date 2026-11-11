@@ -53,18 +53,32 @@
                     <div class="form-fila">
                         <div class="form-grupo">
                             <label for="registro-password">Contraseña</label>
-                            <input type="password" id="registro-password" name="password"
-                                placeholder="Mínimo 8 caracteres">
+                            <div class="campo-password">
+                                <input type="password" id="registro-password" name="password"
+                                    placeholder="Mínimo 8 caracteres">
+                                <button type="button" class="btn-ver-password" data-objetivo="registro-password"
+                                    aria-label="Mostrar contraseña">Mostrar</button>
+                            </div>
                             <p class="mensaje-error" id="error-registro-password"></p>
                         </div>
 
                         <div class="form-grupo">
                             <label for="registro-confirmar">Confirmar contraseña</label>
-                            <input type="password" id="registro-confirmar" name="confirmar-password"
-                                placeholder="Repite tu contraseña">
+                            <div class="campo-password">
+                                <input type="password" id="registro-confirmar" name="confirmar-password"
+                                    placeholder="Repite tu contraseña">
+                                <button type="button" class="btn-ver-password" data-objetivo="registro-confirmar"
+                                    aria-label="Mostrar contraseña">Mostrar</button>
+                            </div>
                             <p class="mensaje-error" id="error-registro-confirmar"></p>
                         </div>
                     </div>
+                    <ul class="requisitos-password" id="requisitos-password" aria-live="polite">
+                        <li data-requisito="largo">Al menos 8 caracteres</li>
+                        <li data-requisito="comun">No es una contraseña común</li>
+                        <li data-requisito="correo">La contraseña no incluye tu correo</li>
+                        <li data-requisito="coincide">Las contraseñas coinciden</li>
+                    </ul>
                     <p class="mensaje-error" id="error-registro-general"></p>
 
                     <button type="submit" class="btn-primary btn-auth">Crear cuenta</button>
