@@ -10,8 +10,11 @@ function validarLogin() {
     const errorCorreo = document.querySelector("#error-login-correo");
     const campoPassword = document.querySelector("#login-password");
     const errorPassword = document.querySelector("#error-login-password");
+    const errorGeneral = document.querySelector("#error-login-general");
+    const mensajeExito = document.querySelector("#exito-login");
+    const botonEnviar = formulario.querySelector("button[type='submit']");
 
-    formulario.addEventListener("submit", function(evento) {
+    formulario.addEventListener("submit", async function(evento) {
         evento.preventDefault();
 
         const correo = campoCorreo.value.trim();
@@ -21,6 +24,8 @@ function validarLogin() {
 
         errorCorreo.textContent = "";
         errorPassword.textContent = "";
+        errorGeneral.textContent = "";
+        mensajeExito.textContent = "";
 
         if (correo === "") {
             errorCorreo.textContent = "El correo es obligatorio";
@@ -39,15 +44,50 @@ function validarLogin() {
             return;
         }
 
-        console.log("Login válido:", correo);
+        botonEnviar.disabled = true;
+        botonEnviar.textContent = "Ingresando...";
+
+        try {
+            const respuesta = await fetch(API_URL + "/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    correo: correo,
+                    password: password
+                })
+            });
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                errorGeneral.textContent = datos.mensaje || "No se pudo iniciar sesión";
+                return;
+            }
+
+            guardarSesion(datos.token, datos.usuario);
+            mensajeExito.textContent = "Bienvenido, " + datos.usuario.nombre + ". Te llevamos al inicio...";
+            formulario.reset();
+
+            setTimeout(function () {
+                window.location.href = "../index.html";
+            }, 1000);
+
+        } catch (error) {
+            errorGeneral.textContent = "No pudimos conectar con el servidor. Inténtalo de nuevo.";
+        } finally {
+            botonEnviar.disabled = false;
+            botonEnviar.textContent = "Ingresar";
+        }
     });
 
     campoCorreo.addEventListener("input", function() {
         errorCorreo.textContent = "";
+        errorGeneral.textContent = "";
     });
 
     campoPassword.addEventListener("input", function() {
         errorPassword.textContent = "";
+        errorGeneral.textContent = "";
     });
 }
 

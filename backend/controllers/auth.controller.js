@@ -1,9 +1,11 @@
 const usuariosModel = require("../models/usuario.model");
-const { hashearPassword } = require("../utils/password");
+const { hashearPassword, compararPassword } = require("../utils/password");
+const { firmarToken } = require("../utils/token");
 
 const REGEX_CORREO = /^\S+@\S+\.\S+$/;
 const PASSWORD_MINIMO = 8;
 const PASSWORD_MAXIMO_BYTES = 72;
+const MENSAJE_CREDENCIALES = "Correo o contraseña incorrectos";
 
 function validarRegistro(nombre, correo, password) {
     const errores = {};
@@ -67,4 +69,45 @@ async function registrar(req, res) {
     }
 }
 
-module.exports = { registrar };
+async function iniciarSesion(req, res) {
+    try {
+        const cuerpo = req.body || {};
+
+        const faltaCorreo = typeof cuerpo.correo !== "string" || cuerpo.correo.trim() === "";
+        const faltaPassword = typeof cuerpo.password !== "string" || cuerpo.password === "";
+
+        if (faltaCorreo || faltaPassword) {
+            return res.status(400).json({ mensaje: "El correo y la contraseña son obligatorios" });
+        }
+
+        const correo = cuerpo.correo.trim().toLowerCase();
+        const usuario = await usuariosModel.obtenerUsuarioParaLogin(correo);
+
+        if (!usuario || !usuario.passwordHash) {
+            return res.status(401).json({ mensaje: MENSAJE_CREDENCIALES });
+        }
+
+        const coincide = await compararPassword(cuerpo.password, usuario.passwordHash);
+
+        if (!coincide) {
+            return res.status(401).json({ mensaje: MENSAJE_CREDENCIALES });
+        }
+
+        const token = firmarToken(usuario);
+
+        res.json({
+            mensaje: "Inicio de sesión correcto",
+            token: token,
+            usuario: usuario
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: "Error interno del servidor" });
+    }
+}
+
+function perfil(req, res) {
+    res.json({ usuario: req.usuario });
+}
+
+module.exports = { registrar, iniciarSesion, perfil };
