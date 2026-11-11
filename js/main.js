@@ -3,7 +3,7 @@ const nav = document.querySelector("nav");
 
 console.log(menuToggle);
 console.log(nav);
-menuToggle.addEventListener("click", function() {
+menuToggle.addEventListener("click", function () {
     nav.classList.toggle("nav-active");
 });
 
@@ -176,8 +176,8 @@ const productos = [
         descripcion: "Reloj clásico y versátil, fácil de combinar con cualquier estilo.",
         destacado: false
     }
-]; console.log(productos); 
-productos.forEach(function(producto) {
+]; console.log(productos);
+productos.forEach(function (producto) {
     console.log(producto.nombre);
 });
 
@@ -194,7 +194,7 @@ function renderizarProductos(selectorContenedor, listaProductos) {
 
     contenedor.innerHTML = "";
 
-    listaProductos.forEach(function(producto) {
+    listaProductos.forEach(function (producto) {
         const tarjeta = document.createElement("article");
         tarjeta.classList.add("product-card");
 
@@ -501,8 +501,8 @@ function cargarCarrito() {
     const textoGuardado = localStorage.getItem("carrito");
 
     if (textoGuardado) {
-        return JSON.parse(textoGuardado).map(function(item) {
-            const productoActual = productos.find(function(producto) {
+        return JSON.parse(textoGuardado).map(function (item) {
+            const productoActual = productos.find(function (producto) {
                 return producto.nombre === item.nombre;
             });
 
@@ -585,8 +585,9 @@ function obtenerToken() {
 
 function actualizarEncabezado() {
     const enlaceLogin = document.querySelector('nav a[href$="login.html"]');
+    const contenedorLogo = document.querySelector(".header-brand");
 
-    if (!enlaceLogin) {
+    if (!enlaceLogin || !contenedorLogo) {
         return;
     }
 
@@ -597,15 +598,21 @@ function actualizarEncabezado() {
     }
 
     const primerNombre = sesion.usuario.nombre.split(" ")[0];
-    enlaceLogin.textContent = "Hola, " + primerNombre;
-    enlaceLogin.addEventListener("click", function (evento) {
-        evento.preventDefault();
-    });
+
+    const saludo = document.createElement("span");
+    saludo.classList.add("saludo-usuario");
+    saludo.textContent = "Hola, " + primerNombre;
+
+    contenedorLogo.appendChild(saludo);
+
+    enlaceLogin.parentElement.remove();
 
     const itemSalir = document.createElement("li");
     const enlaceSalir = document.createElement("a");
+
     enlaceSalir.href = "#";
     enlaceSalir.textContent = "Cerrar sesión";
+
     enlaceSalir.addEventListener("click", function (evento) {
         evento.preventDefault();
         cerrarSesion();
@@ -613,7 +620,7 @@ function actualizarEncabezado() {
     });
 
     itemSalir.appendChild(enlaceSalir);
-    enlaceLogin.parentElement.after(itemSalir);
+    document.querySelector("nav ul").appendChild(itemSalir);
 }
 
 actualizarEncabezado();
