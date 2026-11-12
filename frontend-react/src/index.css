@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 40px 8%;
+}
+
+.tarjeta {
+    max-width: 280px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.tarjeta button {
+    padding: 8px 14px;
+    background-color: gold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
