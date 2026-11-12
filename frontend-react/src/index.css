@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 40px 8%;
+}
+
+.tarjeta {
+    max-width: 280px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.tarjeta button {
+    padding: 8px 14px;
+    background-color: gold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+}
+
+.formulario input {
+    padding: 10px;
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: white;
+}
+
+.formulario button,
+main > section button {
+    padding: 10px 14px;
+    background-color: gold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8%;
+    border-bottom: 1px dashed #333;
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: gold;
+}
+
+.encabezado nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.encabezado nav button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: white;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.encabezado nav button:hover,
+.encabezado nav button.activa {
+    color: gold;
+    border-bottom-color: gold;
+}
+
+.rol {
+    color: #777;
+    font-size: 0.8rem;
+}

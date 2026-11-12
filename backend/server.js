@@ -4,6 +4,7 @@ const conectarBD = require("./config/db");
 const productosRoutes = require("./routes/productos.routes");
 const usuariosRoutes = require("./routes/usuarios.routes");
 const authRoutes = require("./routes/auth.routes");
+const opcionesRoutes = require("./routes/opciones.routes");
 const cors = require("cors");
 
 const app = express();
@@ -14,7 +15,9 @@ app.use(cors({
         "http://localhost:5500",
         "http://127.0.0.1:5500",
         "http://localhost:3000",
-        "http://127.0.0.1:3000"
+        "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
     ]
 }));
 
@@ -31,6 +34,7 @@ app.get("/api/salud", function (req, res) {
 app.use("/api/productos", productosRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/opciones", opcionesRoutes);
 
 app.use(function (req, res) {
     res.status(404).json({ mensaje: "Ruta no encontrada" });
