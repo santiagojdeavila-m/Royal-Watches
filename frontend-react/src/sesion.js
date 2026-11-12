@@ -53,3 +53,8 @@ export function obtenerSesion() {
         return null;
     }
 }
+
+export function obtenerToken() {
+    const sesion = obtenerSesion();
+    return sesion ? sesion.token : null;
+}

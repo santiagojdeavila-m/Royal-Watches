@@ -1,13 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navegacion from "./components/Navegacion";
 import FormularioLogin from "./components/FormularioLogin";
 import { obtenerSesion, cerrarSesion } from "./sesion";
+import { pedirOpciones } from "./api";
+
+const OPCIONES_VISITANTE = [
+    { id: "inicio", etiqueta: "Inicio" },
+    { id: "catalogo", etiqueta: "Catálogo" },
+    { id: "login", etiqueta: "Iniciar sesión" }
+];
 
 function App() {
     const [sesion, setSesion] = useState(obtenerSesion);
     const [vista, setVista] = useState("inicio");
+    const [opcionesServidor, setOpcionesServidor] = useState([]);
+    const [errorOpciones, setErrorOpciones] = useState("");
 
     const rol = sesion ? sesion.usuario.rol : "visitante";
+    const opciones = sesion ? opcionesServidor : OPCIONES_VISITANTE;
+
+    useEffect(function () {
+        if (!sesion) {
+            setOpcionesServidor([]);
+            setErrorOpciones("");
+            return;
+        }
+
+        let vigente = true;
+
+        pedirOpciones(sesion.token)
+            .then(function (lista) {
+                if (vigente) {
+                    setOpcionesServidor(lista);
+                    setErrorOpciones("");
+                }
+            })
+            .catch(function (error) {
+                if (!vigente) {
+                    return;
+                }
+
+                if (error.estado === 401) {
+                    cerrarSesion();
+                    setSesion(null);
+                    return;
+                }
+
+                setErrorOpciones("No pudimos cargar tus opciones");
+            });
+
+        return function () {
+            vigente = false;
+        };
+    }, [sesion]);
 
     function elegir(id) {
         if (id === "salir") {
@@ -53,11 +98,12 @@ function App() {
         <>
             <header className="encabezado">
                 <h1>Royal Watches</h1>
-                <Navegacion rol={rol} vistaActual={vista} alElegir={elegir} />
+                <Navegacion opciones={opciones} vistaActual={vista} alElegir={elegir} />
             </header>
 
             <main>
                 <p className="rol">Rol actual: {rol}</p>
+                {errorOpciones && <p className="error">{errorOpciones}</p>}
                 {renderizarContenido()}
             </main>
         </>
