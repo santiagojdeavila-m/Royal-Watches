@@ -1,11 +1,27 @@
-import TarjetaProducto from "./components/TarjetaProducto";
+import { useState } from "react";
+import FormularioLogin from "./components/FormularioLogin";
+import { obtenerSesion, cerrarSesion } from "./sesion";
 
 function App() {
+    const [sesion, setSesion] = useState(obtenerSesion);
+
+    function salir() {
+        cerrarSesion();
+        setSesion(null);
+    }
+
     return (
         <main>
             <h1>Royal Watches</h1>
-            <TarjetaProducto nombre="Rolex Submariner" marca="Rolex" />
-            <TarjetaProducto nombre="Cartier Tank" marca="Cartier" />
+
+            {sesion ? (
+                <section>
+                    <p>Hola, {sesion.usuario.nombre} ({sesion.usuario.rol})</p>
+                    <button onClick={salir}>Cerrar sesión</button>
+                </section>
+            ) : (
+                <FormularioLogin alIniciarSesion={function () { setSesion(obtenerSesion()); }} />
+            )}
         </main>
     );
 }

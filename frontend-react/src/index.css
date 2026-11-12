@@ -25,3 +25,38 @@ main {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+}
+
+.formulario input {
+    padding: 10px;
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: white;
+}
+
+.formulario button,
+main > section button {
+    padding: 10px 14px;
+    background-color: gold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin: 0;
+}
