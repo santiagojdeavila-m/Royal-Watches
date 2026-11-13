@@ -5,6 +5,7 @@ const productosRoutes = require("./routes/productos.routes");
 const usuariosRoutes = require("./routes/usuarios.routes");
 const authRoutes = require("./routes/auth.routes");
 const opcionesRoutes = require("./routes/opciones.routes");
+const perfilRoutes = require("./routes/perfil.routes");
 const cors = require("cors");
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/api/productos", productosRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/opciones", opcionesRoutes);
+app.use("/api/perfil", perfilRoutes);
 
 app.use(function (req, res) {
     res.status(404).json({ mensaje: "Ruta no encontrada" });
