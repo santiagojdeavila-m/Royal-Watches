@@ -1,53 +1,122 @@
-import { useState } from "react";
-import ComponentePorRol from "./ComponentePorRol.jsx";
-const API_URL = "http://localhost:4000/api";
-export default function App() {
-  const [correo, setCorreo] = useState("ana@prueba.com");
-  const [password, setPassword] = useState("clave12345");
-  const [sesion, setSesion] = useState(null);
-  const [resultado, setResultado] = useState("");
-  async function iniciarSesion(e) {
-    e.preventDefault();
-    const res = await fetch(`${API_URL}/auth/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ correo, password }) });
-    const datos = await res.json();
-    if (!res.ok) { setResultado(`Login: ${res.status} - ${datos.mensaje}`); return; }
-    const resYo = await fetch(`${API_URL}/auth/yo`, { headers: { Authorization: `Bearer ${datos.token}` } });
-    const datosYo = await resYo.json();
-    setSesion({ token: datos.token, usuario: datos.usuario, permisos: datosYo.permisos || [] });
-    setResultado(`Login OK: ${res.status} - rol ${datos.usuario.rol}`);
-  }
-  async function intentar(accion) {
-    let url = `${API_URL}/productos`;
-    let opciones = { headers: {} };
-    if (sesion?.token) { opciones.headers.Authorization = `Bearer ${sesion.token}`; }
-    if (accion === "crear") { opciones.method = "POST"; opciones.headers["Content-Type"] = "application/json"; opciones.body = JSON.stringify({ nombre: "Prueba React", marca: "Test", precio: 100, imagen: "img/img-catalogo/Rolex_Submariner.png" }); }
-    if (accion === "ver-usuarios") { url = `${API_URL}/usuarios`; }
-    if (accion === "yo") { url = `${API_URL}/auth/yo`; }
-    const res = await fetch(url, opciones);
-    const texto = await res.text();
-    setResultado(`${accion}: ${res.status} - ${texto.slice(0, 400)}`);
-  }
-  return (
-    <main style={{ fontFamily: "sans-serif", padding: "24px", maxWidth: "700px" }}>
-      <h1>Prueba de permisos - Royal Watches</h1>
-      <form onSubmit={iniciarSesion}>
-        <input value={correo} onChange={(e) => setCorreo(e.target.value)} placeholder="Correo" />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" />
-        <button type="submit">Iniciar sesión</button>
-      </form>
-      {sesion && <ComponentePorRol rol={sesion.usuario.rol} permisos={sesion.permisos} />}
-      {sesion && (
-        <section>
-          <p>Hola, {sesion.usuario.nombre} - Rol: {sesion.usuario.rol}</p>
-          <p>Permisos: {sesion.permisos.join(", ")}</p>
-          {sesion.permisos.includes("productos:crear") && <button onClick={() => intentar("crear")}>Crear producto (solo si tienes permiso)</button>}
-          <button onClick={() => intentar("ver-usuarios")}>Intentar ver usuarios</button>
-          <button onClick={() => intentar("yo")}>Ver mi perfil y permisos</button>
-          <button onClick={() => { setSesion(null); setResultado("Sesión cerrada"); }}>Cerrar sesión</button>
-        </section>
-      )}
-      {!sesion && <button onClick={() => intentar("crear")}>Intentar crear sin sesión (debe dar 401)</button>}
-      <pre style={{ background: "#111", color: "#0f0", padding: "12px", whiteSpace: "pre-wrap" }}>{resultado}</pre>
-    </main>
-  );
+import { useState, useEffect } from "react";
+import Navegacion from "./components/Navegacion";
+import FormularioLogin from "./components/FormularioLogin";
+import PanelUsuario from "./components/PanelUsuario";
+import { obtenerSesion, cerrarSesion } from "./sesion";
+import { pedirOpciones } from "./api";
+
+const OPCIONES_VISITANTE = [
+    { id: "inicio", etiqueta: "Inicio" },
+    { id: "catalogo", etiqueta: "Catálogo" },
+    { id: "login", etiqueta: "Iniciar sesión" }
+];
+
+function App() {
+    const [sesion, setSesion] = useState(obtenerSesion);
+    const [vista, setVista] = useState("inicio");
+    const [opcionesServidor, setOpcionesServidor] = useState([]);
+    const [errorOpciones, setErrorOpciones] = useState("");
+
+    const rol = sesion ? sesion.usuario.rol : "visitante";
+    const opciones = sesion ? opcionesServidor : OPCIONES_VISITANTE;
+
+    // Cada vez que cambia la sesión, se piden al servidor las opciones del rol
+    useEffect(function () {
+        if (!sesion) {
+            setOpcionesServidor([]);
+            setErrorOpciones("");
+            return;
+        }
+
+        let vigente = true;
+
+        pedirOpciones()
+            .then(function (lista) {
+                if (vigente) {
+                    setOpcionesServidor(lista);
+                    setErrorOpciones("");
+                }
+            })
+            .catch(function (error) {
+                if (!vigente) {
+                    return;
+                }
+
+                if (error.estado === 401) {
+                    cerrarSesion();
+                    setSesion(null);
+                    return;
+                }
+
+                setErrorOpciones("No pudimos cargar tus opciones");
+            });
+
+        return function () {
+            vigente = false;
+        };
+    }, [sesion]);
+
+    function elegir(id) {
+        if (id === "salir") {
+            cerrarSesion();
+            setSesion(null);
+            setVista("inicio");
+            return;
+        }
+
+        setVista(id);
+    }
+
+    function alIniciarSesion() {
+        setSesion(obtenerSesion());
+        setVista("inicio");
+    }
+
+    function refrescarSesion() {
+        setSesion(obtenerSesion());
+    }
+
+    function renderizarContenido() {
+        if (vista === "login" && !sesion) {
+            return <FormularioLogin alIniciarSesion={alIniciarSesion} />;
+        }
+
+        if (vista === "panel" && sesion) {
+            return <PanelUsuario alActualizarUsuario={refrescarSesion} />;
+        }
+
+        if (vista === "catalogo") {
+            return <p>Aquí irá el catálogo.</p>;
+        }
+
+        if (vista === "carrito" && rol === "cliente") {
+            return <p>Aquí irá tu carrito.</p>;
+        }
+
+        if (vista === "administracion") {
+            if (rol === "admin") {
+                return <p>Panel de administración.</p>;
+            }
+
+            return <p className="error">No tienes acceso a esta sección.</p>;
+        }
+
+        return <p>{sesion ? `Hola, ${sesion.usuario.nombre}` : "Bienvenido a Royal Watches"}</p>;
+    }
+
+    return (
+        <>
+            <header className="encabezado">
+                <h1>Royal Watches</h1>
+                <Navegacion opciones={opciones} vistaActual={vista} alElegir={elegir} />
+            </header>
+
+            <main>
+                {errorOpciones && <p className="error">{errorOpciones}</p>}
+                {renderizarContenido()}
+            </main>
+        </>
+    );
 }
+
+export default App;

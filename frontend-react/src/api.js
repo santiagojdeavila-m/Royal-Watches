@@ -1,16 +1,44 @@
-import { API_URL } from "./sesion";
+import { API_URL, obtenerToken } from "./sesion";
 
-export async function pedirOpciones(token) {
-    const respuesta = await fetch(API_URL + "/api/opciones", {
-        headers: { Authorization: "Bearer " + token }
+async function llamar(ruta, metodo, cuerpo) {
+    const opciones = {
+        method: metodo,
+        headers: { Authorization: "Bearer " + obtenerToken() }
+    };
+
+    if (cuerpo) {
+        opciones.headers["Content-Type"] = "application/json";
+        opciones.body = JSON.stringify(cuerpo);
+    }
+
+    const respuesta = await fetch(API_URL + ruta, opciones);
+    const datos = await respuesta.json().catch(function () {
+        return {};
     });
 
     if (!respuesta.ok) {
-        const error = new Error("No se pudieron cargar las opciones");
+        const error = new Error(datos.mensaje || "Error en la petición");
         error.estado = respuesta.status;
+        error.errores = datos.errores || {};
         throw error;
     }
 
-    const datos = await respuesta.json();
+    return datos;
+}
+
+export async function pedirOpciones() {
+    const datos = await llamar("/api/opciones", "GET");
     return datos.opciones;
+}
+
+export function pedirPerfil() {
+    return llamar("/api/perfil", "GET");
+}
+
+export function guardarPerfil(datos) {
+    return llamar("/api/perfil", "PATCH", datos);
+}
+
+export function cambiarPassword(datos) {
+    return llamar("/api/perfil/password", "PATCH", datos);
 }

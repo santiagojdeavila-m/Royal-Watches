@@ -102,3 +102,45 @@ main > section button {
     color: #777;
     font-size: 0.8rem;
 }
+
+.panel {
+    max-width: 420px;
+}
+
+.panel-pestanas {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.panel-pestanas button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: white;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.panel-pestanas button:hover,
+.panel-pestanas button.activa {
+    color: gold;
+    border-bottom-color: gold;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.exito {
+    color: #6bd68c;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.cargando {
+    color: #aaa;
+}
