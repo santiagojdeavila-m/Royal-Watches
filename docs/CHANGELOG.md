@@ -103,3 +103,12 @@
 - Se incorporó el filtrado de usuarios por rol en el listado de usuarios.
 - Se realizaron ajustes en el modelo y controlador de usuarios.
 - Se integraron nuevos cambios mediante Pull Requests.
+
+## [1.0.0] - 2026-11-13
+### Añadido
+- Asistente de recomendaciones con IA (Groq) y límite de uso.
+- Límite de intentos en registro, login e IA.
+- Configuración de producción: `PORT`, `trust proxy` y CORS por variable de entorno.
+- `.env.example` y README actualizado.
+### Eliminado
+- Archivos sin uso (componentePorRol, App.css, assets, TarjetaProducto, package-lock de la raíz).
