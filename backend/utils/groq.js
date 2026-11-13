@@ -10,7 +10,7 @@ class ErrorIA extends Error {
 
 async function preguntar(mensajes) {
     const clave = process.env.GROQ_API_KEY;
-    const modelo = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+    const modelo = process.env.GROQ_MODEL || "openai/gpt-oss-20b";
 
     if (!clave) {
         console.error("Falta GROQ_API_KEY en backend/.env");
@@ -30,7 +30,8 @@ async function preguntar(mensajes) {
                 model: modelo,
                 messages: mensajes,
                 temperature: 0.4,
-                max_tokens: 400
+                max_completion_tokens: 1500,
+                reasoning_effort: "low"
             }),
             signal: AbortSignal.timeout(TIEMPO_MAXIMO_MS)
         });
