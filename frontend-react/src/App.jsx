@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navegacion from "./components/Navegacion";
 import FormularioLogin from "./components/FormularioLogin";
 import PanelUsuario from "./components/PanelUsuario";
+import PanelAdmin from "./components/PanelAdmin";
 import { obtenerSesion, cerrarSesion } from "./sesion";
 import { pedirOpciones } from "./api";
 
@@ -15,15 +16,16 @@ function App() {
     const [sesion, setSesion] = useState(obtenerSesion);
     const [vista, setVista] = useState("inicio");
     const [opcionesServidor, setOpcionesServidor] = useState([]);
+    const [permisos, setPermisos] = useState([]);
     const [errorOpciones, setErrorOpciones] = useState("");
 
     const rol = sesion ? sesion.usuario.rol : "visitante";
     const opciones = sesion ? opcionesServidor : OPCIONES_VISITANTE;
 
-    // Cada vez que cambia la sesión, se piden al servidor las opciones del rol
     useEffect(function () {
         if (!sesion) {
             setOpcionesServidor([]);
+            setPermisos([]);
             setErrorOpciones("");
             return;
         }
@@ -31,9 +33,10 @@ function App() {
         let vigente = true;
 
         pedirOpciones()
-            .then(function (lista) {
+            .then(function (datos) {
                 if (vigente) {
-                    setOpcionesServidor(lista);
+                    setOpcionesServidor(datos.opciones);
+                    setPermisos(datos.permisos || []);
                     setErrorOpciones("");
                 }
             })
@@ -94,8 +97,12 @@ function App() {
         }
 
         if (vista === "administracion") {
-            if (rol === "admin") {
-                return <p>Panel de administración.</p>;
+            const puedeAdministrar = permisos.includes("productos:crear")
+                || permisos.includes("productos:editar")
+                || permisos.includes("productos:eliminar");
+
+            if (sesion && puedeAdministrar) {
+                return <PanelAdmin permisos={permisos} />;
             }
 
             return <p className="error">No tienes acceso a esta sección.</p>;

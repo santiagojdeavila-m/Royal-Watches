@@ -26,9 +26,24 @@ async function llamar(ruta, metodo, cuerpo) {
     return datos;
 }
 
-export async function pedirOpciones() {
-    const datos = await llamar("/api/opciones", "GET");
-    return datos.opciones;
+export function pedirOpciones() {
+    return llamar("/api/opciones", "GET");
+}
+
+export function pedirProductos() {
+    return llamar("/api/productos", "GET");
+}
+
+export function crearProducto(datos) {
+    return llamar("/api/productos", "POST", datos);
+}
+
+export function editarProducto(id, datos) {
+    return llamar("/api/productos/" + id, "PATCH", datos);
+}
+
+export function eliminarProducto(id) {
+    return llamar("/api/productos/" + id, "DELETE");
 }
 
 export function pedirPerfil() {

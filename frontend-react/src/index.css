@@ -144,3 +144,112 @@ main > section button {
 .cargando {
     color: #aaa;
 }
+
+.panel-admin {
+    max-width: 900px;
+}
+
+.barra-herramientas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabla th,
+.tabla td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.tabla th {
+    color: gold;
+    font-weight: 600;
+}
+
+.tabla-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.tabla-acciones button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+.formulario-ancho {
+    max-width: 520px;
+}
+
+.formulario textarea {
+    padding: 10px;
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: white;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.campo-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.boton-secundario {
+    background: none;
+    border: 1px solid gold;
+    border-radius: 5px;
+    color: gold;
+    cursor: pointer;
+    padding: 8px 14px;
+}
+
+.boton-peligro {
+    background-color: #c0392b;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 8px 14px;
+}
+
+.modal-fondo {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 300;
+}
+
+.modal {
+    width: 90%;
+    max-width: 420px;
+    padding: 24px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
