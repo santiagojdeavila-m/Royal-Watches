@@ -10,18 +10,26 @@ const iaRoutes = require("./routes/ia.routes");
 const cors = require("cors");
 
 const app = express();
-const PUERTO = 4000;
+const PUERTO = process.env.PORT || 4000;
 
-app.use(cors({
-    origin: [
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:5173"
-    ]
-}));
+app.set("trust proxy", 1);
+app.disable("x-powered-by");
+
+const ORIGENES_LOCALES = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+];
+
+const ORIGENES_PUBLICADOS = (process.env.FRONTEND_ORIGINS || "")
+    .split(",")
+    .map(function (origen) { return origen.trim(); })
+    .filter(Boolean);
+
+app.use(cors({ origin: ORIGENES_LOCALES.concat(ORIGENES_PUBLICADOS) }));
 
 app.use(express.json());
 
