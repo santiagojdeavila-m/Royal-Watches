@@ -5,6 +5,7 @@ import PanelUsuario from "./components/PanelUsuario";
 import PanelAdmin from "./components/PanelAdmin";
 import { obtenerSesion, cerrarSesion } from "./sesion";
 import { pedirOpciones } from "./api";
+import AsistenteIA from "./components/AsistenteIA";
 
 const OPCIONES_VISITANTE = [
     { id: "inicio", etiqueta: "Inicio" },
@@ -108,7 +109,12 @@ function App() {
             return <p className="error">No tienes acceso a esta sección.</p>;
         }
 
-        return <p>{sesion ? `Hola, ${sesion.usuario.nombre}` : "Bienvenido a Royal Watches"}</p>;
+        return (
+            <>
+                <p>{sesion ? `Hola, ${sesion.usuario.nombre}` : "Bienvenido a Royal Watches"}</p>
+                {sesion && <AsistenteIA />}
+            </>
+        );
     }
 
     return (
