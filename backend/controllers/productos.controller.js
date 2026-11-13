@@ -12,12 +12,57 @@ function extraerCampos(cuerpo) {
     return datos;
 }
 
+function validarProducto(datos, esCreacion) {
+    const errores = {};
+
+    function presente(campo) {
+        return esCreacion || datos[campo] !== undefined;
+    }
+
+    if (presente("nombre")) {
+        if (typeof datos.nombre !== "string" || datos.nombre.trim().length < 2 || datos.nombre.trim().length > 100) {
+            errores.nombre = "El nombre debe tener entre 2 y 100 caracteres";
+        }
+    }
+
+    if (presente("marca")) {
+        if (typeof datos.marca !== "string" || datos.marca.trim() === "") {
+            errores.marca = "La marca es obligatoria";
+        }
+    }
+
+    if (presente("precio")) {
+        if (typeof datos.precio !== "number" || !Number.isFinite(datos.precio) || datos.precio < 0) {
+            errores.precio = "El precio debe ser un número mayor o igual a 0";
+        }
+    }
+
+    if (presente("imagen")) {
+        if (typeof datos.imagen !== "string" || datos.imagen.trim() === "") {
+            errores.imagen = "La imagen es obligatoria";
+        }
+    }
+
+    if (datos.descripcion !== undefined) {
+        if (typeof datos.descripcion !== "string" || datos.descripcion.length > 500) {
+            errores.descripcion = "La descripción no puede pasar de 500 caracteres";
+        }
+    }
+
+    if (datos.destacado !== undefined && typeof datos.destacado !== "boolean") {
+        errores.destacado = "Destacado debe ser verdadero o falso";
+    }
+
+    return errores;
+}
+
 function manejarError(error, res) {
     if (error.name === "ValidationError") {
-        const mensajes = Object.values(error.errors).map(function (e) {
-            return e.message;
+        const errores = {};
+        Object.keys(error.errors).forEach(function (campo) {
+            errores[campo] = error.errors[campo].message;
         });
-        return res.status(400).json({ mensaje: "Datos inválidos", errores: mensajes });
+        return res.status(400).json({ mensaje: "Datos inválidos", errores: errores });
     }
 
     if (error.name === "CastError") {
@@ -25,7 +70,10 @@ function manejarError(error, res) {
     }
 
     if (error.code === 11000) {
-        return res.status(409).json({ mensaje: "Ya existe un producto con ese nombre" });
+        return res.status(409).json({
+            mensaje: "Ya existe un producto con ese nombre",
+            errores: { nombre: "Ya existe un producto con ese nombre" }
+        });
     }
 
     console.error(error);
@@ -56,6 +104,12 @@ async function obtenerProductoPorId(req, res) {
 async function crearProducto(req, res) {
     try {
         const datos = extraerCampos(req.body || {});
+        const errores = validarProducto(datos, true);
+
+        if (Object.keys(errores).length > 0) {
+            return res.status(400).json({ mensaje: "Datos inválidos", errores: errores });
+        }
+
         const producto = await productosModel.crearProducto(datos);
         res.status(201).json(producto);
     } catch (error) {
@@ -69,6 +123,12 @@ async function actualizarProducto(req, res) {
 
         if (Object.keys(cambios).length === 0) {
             return res.status(400).json({ mensaje: "No hay datos para actualizar" });
+        }
+
+        const errores = validarProducto(cambios, false);
+
+        if (Object.keys(errores).length > 0) {
+            return res.status(400).json({ mensaje: "Datos inválidos", errores: errores });
         }
 
         const producto = await productosModel.actualizarProducto(req.params.id, cambios);

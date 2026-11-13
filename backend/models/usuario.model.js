@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ROLES = ["cliente", "admin"];
+const ROLES = ["cliente", "editor", "admin"];
 
 const usuarioSchema = new mongoose.Schema(
     {
@@ -23,7 +23,7 @@ const usuarioSchema = new mongoose.Schema(
             type: String,
             enum: {
                 values: ROLES,
-                message: "El rol debe ser cliente o admin"
+                message: "El rol debe ser cliente, editor o admin"
             },
             default: "cliente"
         },
